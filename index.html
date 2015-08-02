@@ -1,63 +1,104 @@
 <!doctype html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>道路中心線ベクトルタイル表示サンプル</title>
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.2/leaflet.css"/>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.2/leaflet.js"></script>
-    <script src="./leaflet-hash.js"></script>
-    <script src="./TileLayer.GeoJSON.js"></script>
-    <style>
-      body {padding: 0; margin: 0}
-      html, body, #mapdiv {height: 100%; width: 100%;}
-      .leaflet-container {background: #fff;}
-    </style>
-  </head>
-  <body>
-    <div id="mapdiv">
-    <script>
-      var std = L.tileLayer(
-        'http://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png',
-        {attribution: "地理院タイル（標準地図）", opacity: 0.4,
-         maxNativeZoom: 18, maxZoom: 22});
-      var vec_style = {color: '#888', weight: 8.0, opacity: 1};
-      var vec_broad = {color: '#888', weight: 20.0, opacity: 1};
-      var vec_dash = {color: '#888', weight: 8.0, opacity: 1, dashArray: 10};
-      var style_function = function(feature) {
-        if(feature.properties.rnkWidth == '19.5m以上') {
-          return vec_broad;
-        }
-        if(feature.properties.type == '庭園路') {
-          return vec_dash;
-        } else {
-          return vec_style;
-        }
-      }
-      var vec = new L.TileLayer.GeoJSON(
-        'http://cyberjapandata.gsi.go.jp/xyz/experimental_rdcl/{z}/{x}/{y}.geojson',
-        {attribution: '道路中心線',
-         maxNativeZoom: 16, maxZoom: 22 
-        },
-        {style: style_function,
-         onEachFeature: function(feature, layer) {
-           var s = '<div class="popup">';
-           for(var k in feature.properties) {
-             var v = feature.properties[k];
-             s += k + ': ' + v + '<br>';
-           }
-           s += '</div>';
-           layer.bindPopup(s);
-         }
-        });
-      var map = L.map('mapdiv', {
-        center: [36.10347, 140.08741], zoom: 17, maxZoom: 22, 
-        layers: [vec, std]});
-      L.control.scale({imperial: false}).addTo(map);
-      var hash = L.hash(map);
-      L.control.layers({}, {
-        '地理院タイル（標準地図）': std,
-        '道路中心線': vec
-      }).addTo(map);
-    </script>
-  </body>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>地理院ベクトルタイル提供実験（中心線）</title>
+<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css"/>
+<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+<script src="./TileLayer.GeoJSON.js"></script>
+<script src="./leaflet-hash.js"></script>
+<style>
+
+body {padding: 0; margin: 0;}
+html, body, #mapdiv {height: 100%; width: 100%;}
+.leaflet-container {background: #fff;}
+.gsi-div-icon {
+	background: none;
+	white-space: nowrap;
+	border:none;
+}
+</style>
+</head>
+<body>
+<div id="mapdiv">
+<script>
+
+//鉄道中心線
+var xhr = new XMLHttpRequest();
+xhr.open('GET', 'http://cyberjapandata.gsi.go.jp/xyz/experimental_railcl/style.js', false);
+xhr.send(null);
+var stylejs = eval( "(" + xhr.responseText + ")" );
+
+var raillayer = new L.TileLayer.GeoJSON(
+'http://cyberjapandata.gsi.go.jp/xyz/experimental_railcl/{z}/{x}/{y}.geojson',
+stylejs.options,stylejs.geojsonOptions);
+
+
+//道路中心線
+var xhr = new XMLHttpRequest();
+xhr.open('GET', 'http://cyberjapandata.gsi.go.jp/xyz/experimental_rdcl/style.js', false);
+xhr.send(null);
+var stylejs = eval( "(" + xhr.responseText + ")" );
+
+var rdcllayer = new L.TileLayer.GeoJSON(
+'http://cyberjapandata.gsi.go.jp/xyz/experimental_rdcl/{z}/{x}/{y}.geojson',
+stylejs.options,stylejs.geojsonOptions);
+
+
+//河川中心線
+var xhr = new XMLHttpRequest();
+xhr.open('GET', 'http://cyberjapandata.gsi.go.jp/xyz/experimental_rvrcl/style.js', false);
+xhr.send(null);
+var stylejs = eval( "(" + xhr.responseText + ")" );
+
+var rvrcllayer = new L.TileLayer.GeoJSON(
+'http://cyberjapandata.gsi.go.jp/xyz/experimental_rvrcl/{z}/{x}/{y}.geojson',
+stylejs.options,stylejs.geojsonOptions);
+
+
+//注記
+var xhr = new XMLHttpRequest();
+xhr.open('GET', 'http://cyberjapandata.gsi.go.jp/xyz/experimental_anno/style.js', false);
+xhr.send(null);
+var stylejs = eval( "(" + xhr.responseText + ")" );
+
+var annolayer = new L.TileLayer.GeoJSON(
+'http://cyberjapandata.gsi.go.jp/xyz/experimental_anno/{z}/{x}/{y}.geojson',
+stylejs.options,stylejs.geojsonOptions);
+
+
+
+var std = L.tileLayer(
+'http://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png',
+{attribution: "地理院タイル（標準地図）", 
+maxNativeZoom: 18, maxZoom: 18, opacity:1});
+var ort = L.tileLayer(
+'http://cyberjapandata.gsi.go.jp/xyz/ort/{z}/{x}/{y}.jpg',
+{attribution: "地理院タイル（オルソ）", 
+maxNativeZoom: 17, maxZoom: 18, opacity:0.7});
+
+var blank = L.tileLayer(
+'http://cyberjapandata.gsi.go.jp/xyz/blank/{z}/{x}/{y}.png',
+{attribution: "地理院タイル（白地図）", 
+maxNativeZoom: 14, maxZoom: 18, opacity:1});
+
+var GSI = {
+	GLOBALS : {}
+};
+
+GSI.GLOBALS.map = L.map('mapdiv', {
+  center: [35.705698,139.957527], zoom: 16,minZoom: 2, maxZoom: 18,
+  layers: [rvrcllayer,rdcllayer,raillayer,annolayer]});
+
+L.control.scale({imperial: false}).addTo(GSI.GLOBALS.map);
+
+//var baseLayers = {"地理院タイル（標準地図）": std,"地理院タイル（オルソ）": ort,"地理院タイル（白地図）": blank};
+var baseLayers ={};
+var overlays = {"地理院タイル（標準地図）": std,"地理院タイル（オルソ）": ort,"地理院タイル（白地図）": blank,'地図情報（河川中心線）': rvrcllayer,'地図情報（道路中心線）': rdcllayer,'地図情報（鉄道中心線）': raillayer,'地図情報（注記）': annolayer};
+
+L.control.layers(baseLayers, overlays,{position:'topright',collapsed:false}).addTo(GSI.GLOBALS.map);
+var hash = L.hash(GSI.GLOBALS.map);
+</script>
+</body>
 </html>
