@@ -18,6 +18,7 @@
 データの仕様は次のとおりです。
 
 -道路中心線
+
 テンプレート URL: http://cyberjapandata.gsi.go.jp/xyz/experimental_rdcl/{z}/{x}/{y}.geojson
 
 サンプル：http://cyberjapandata.gsi.go.jp/xyz/experimental_rdcl/16/58242/25798.geojson
@@ -26,6 +27,7 @@
 
 
 -鉄道中心線
+
 テンプレート URL: http://cyberjapandata.gsi.go.jp/xyz/experimental_railcl/{z}/{x}/{y}.geojson
 
 サンプル：http://cyberjapandata.gsi.go.jp/xyz/experimental_railcl/16/58242/25798.geojson
@@ -34,6 +36,7 @@
 
 
 -河川中心線
+
 テンプレート URL: http://cyberjapandata.gsi.go.jp/xyz/experimental_rvrcl/{z}/{x}/{y}.geojson
 
 サンプル：http://cyberjapandata.gsi.go.jp/xyz/experimental_rvrcl/16/58242/25798.geojson
