@@ -19,21 +19,31 @@
 
 -道路中心線
 テンプレート URL: http://cyberjapandata.gsi.go.jp/xyz/experimental_rdcl/{z}/{x}/{y}.geojson
+
 サンプル：http://cyberjapandata.gsi.go.jp/xyz/experimental_rdcl/16/58242/25798.geojson
+
 ベクトルタイルスタイル定義：http://cyberjapandata.gsi.go.jp/xyz/experimental_rdcl/style.js
+
 
 -鉄道中心線
 テンプレート URL: http://cyberjapandata.gsi.go.jp/xyz/experimental_railcl/{z}/{x}/{y}.geojson
+
 サンプル：http://cyberjapandata.gsi.go.jp/xyz/experimental_railcl/16/58242/25798.geojson
+
 ベクトルタイルスタイル定義：http://cyberjapandata.gsi.go.jp/xyz/experimental_railcl/style.js
+
 
 -河川中心線
 テンプレート URL: http://cyberjapandata.gsi.go.jp/xyz/experimental_rvrcl/{z}/{x}/{y}.geojson
+
 サンプル：http://cyberjapandata.gsi.go.jp/xyz/experimental_rvrcl/16/58242/25798.geojson
+
 ベクトルタイルスタイル定義：http://cyberjapandata.gsi.go.jp/xyz/experimental_rvrcl/style.js
+
 
 ## データについて
 提供範囲は日本全国になります。
+
 データの内容の詳細は、電子国土基本図 地図情報　ファイル仕様書(PDFファイル)（http://www.gsi.go.jp/common/000093949.pdf ）等をご覧ください。
 
 ## デモサイト
