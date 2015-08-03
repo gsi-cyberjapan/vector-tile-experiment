@@ -51,7 +51,7 @@
 
 ## デモサイト
 地理院地図
-http://maps.gsi.go.jp/?ll=35.682503,139.789245&z=16&base=ort&ls=experimental_anno&cd=f4&vs=c1j0l0u0&d=l
+http://maps.gsi.go.jp/?ll=35.707179,139.959544&z=17&base=ort&ls=experimental_railcl%7Cexperimental_anno&cd=f4&vs=c1j0l0u0&d=l
 
 github
 http://gsi-cyberjapan.github.io/vector-tile-experiment
