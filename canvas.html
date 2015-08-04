@@ -1,0 +1,333 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css"/>
+<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+<script src="./TileLayer.GeoJSON.js"></script>
+<script src="./leaflet-hash.js"></script>
+<style>
+body {padding: 0; margin: 0}
+html, body, #mapdiv {height: 100%; width: 100%;}
+.leaflet-container {background: #fff;}
+</style>
+</head>
+<body>
+<div id="mapdiv">
+<script>
+
+function tilexy(tilePoint,zoom,dz,canvas_dx,canvas_dy,tlng,tlat){
+      var tileSize=256;
+      var tz = zoom;
+      if(dz>0){tileSize = 256*Math.pow(2, dz);tz = tz -dz;}
+      var initialResolution = 2 * Math.PI / tileSize;
+      var Resolution = initialResolution / (Math.pow(2, tz));
+      var originShift = 2 * Math.PI / 2.0;
+      var X = tlng * (Math.PI / 180) ;
+      var Y=Math.log(Math.tan(Math.PI/4 + tlat * (Math.PI / 180) / 2) );
+      var tx=(X + originShift)/(tileSize * Resolution);
+      var ty=(Y + originShift)/(tileSize * Resolution);
+      ty = Math.pow(2, tz) - ty;
+      tx=(tx-tilePoint.x)*tileSize+canvas_dx;
+      ty=(ty-tilePoint.y)*tileSize+canvas_dy;
+      return ([tx,ty]);
+}
+
+function cl_geturl(tilePoint,zoom,dz){
+	var url_x =  "";
+	var url_y =  "";
+	var url_a = [];
+	if(dz<0){
+	 var num =Math.pow(2, Math.abs(dz));
+	 for ( var i=0; i<num; i++ ){
+	  	url_x =  i+Math.floor(tilePoint.x / Math.pow(2, dz));
+	  	for ( var ii=0; ii<num;  ii++ ){
+	  		url_y =  ii+Math.floor(tilePoint.y / Math.pow(2, dz));
+	  		url_a.push("/"+url_x+"/"+url_y+".geojson");
+	  	}
+	 }
+	}else{
+	 url_x =  tilePoint.x;
+	 url_y =  tilePoint.y;
+	 url_a.push("/"+url_x+"/"+url_y+".geojson");
+	}
+	return url_a;
+}
+
+function featsearch(layerdata,tilePoint,zoom,dz,canvas,canvas_dx,canvas_dy,urlid){
+ if ( !layerdata ) return;
+ var ctx = canvas.getContext('2d');
+ for ( var i=0; i<layerdata.length; i++ ){
+  var s;
+  switch (urlid){
+       case 'experimental_rdcl':
+         s = rdcl_style(layerdata[i]);
+         break;
+       case 'experimental_railcl':
+         s = railcl_style(layerdata[i]);
+         break;
+       case 'experimental_rvrcl':
+         s = rvrcl_style(layerdata[i]);
+         break;
+  }
+   for ( var a in s){
+    if(a=='setLineDash'){
+     if(ctx.setLineDash!==undefined){
+      ctx.setLineDash(s[a]);
+     }
+     continue;
+    }
+    ctx[a] = s[a];
+   }
+   ctx.beginPath();
+   for ( var ii=0; ii<layerdata[i].geometry.coordinates.length; ii++ ){
+    var test = tilexy(tilePoint,zoom,dz,canvas_dx,canvas_dy,layerdata[i].geometry.coordinates[ii][0],layerdata[i].geometry.coordinates[ii][1]);
+    if(ii==0){ctx.moveTo(test[0], test[1]);}else{ctx.lineTo(test[0], test[1]);}
+   }
+   ctx.stroke();
+ }
+}
+
+
+
+
+//道路中心線スタイル
+function rdcl_style(feature){
+      if(feature.properties['rdCtg'] == "国道" || feature.properties['rdCtg'] == "都道府県道"){
+        return {setLineDash:[],strokeStyle:"#777777",lineWidth:5,globalAlpha:0.5,lineCap:"butt"};
+      }
+      else if(feature.properties['rdCtg'] == "高速自動車国道等"){
+        return {setLineDash:[],strokeStyle:"#ff1493",lineWidth:5,globalAlpha:0.5,lineCap:"butt"};
+      }
+      else{
+       if(feature.properties['type']=="通常部"){
+        return {setLineDash:[],strokeStyle:"#aaaaaa",lineWidth:2,globalAlpha:0.5,lineCap:"butt"};
+       }else{
+        return {setLineDash:[3,3],strokeStyle:"#aaaaaa",lineWidth:2,globalAlpha:0.5,lineCap:"butt"};
+       }
+      }
+}
+
+//道路中心線レイヤ
+var rdcllayer = L.tileLayer.canvas({attribution:"道路中心線",minZoom:14,maxNativeZoom:16,maxZoom:18,async:true});
+rdcllayer.drawTile = function(canvas, tilePoint, zoom) {
+	if(zoom>this.options.minZoom){
+	var urlid = "experimental_rdcl";
+	var dz = zoom - this.options.maxNativeZoom;
+	var canvas_dx = 20;
+	var canvas_dy = 20;
+	if(dz>0){
+	 canvas.width=256*Math.pow(2, dz) + canvas_dx *2;
+	 canvas.height=256*Math.pow(2, dz) + canvas_dy *2;
+	}else{
+	 canvas.width=256 + canvas_dx *2;
+	 canvas.height=256 + canvas_dy *2;
+	}
+	var ctx = canvas.getContext('2d');
+	ctx.fillStyle = '#fff';
+	ctx.globalAlpha=0;
+	ctx.fillRect(0, 0, canvas.width, canvas.height);
+	this.tileDrawn(canvas);
+	var url_a = cl_geturl(tilePoint,zoom,dz);
+	var flag =0;
+	var that = this;
+	for ( var i=0; i<url_a.length; i++ ){
+		var xhr = new XMLHttpRequest();
+		xhr.onload = function() {
+			if(flag==0){
+			flag=1;
+			canvas.style.left = canvas.offsetLeft - canvas_dx + 'px';
+			canvas.style.top = canvas.offsetTop - canvas_dy + 'px';
+			}
+			var cl_json = JSON.parse(this.responseText);
+			featsearch(cl_json.features,tilePoint,zoom,dz,canvas,canvas_dx,canvas_dy,urlid);
+			that.tileDrawn(canvas);
+		};
+		xhr.open("get", 'http://cyberjapandata.gsi.go.jp/xyz/'+urlid+'/'+ this.options.maxNativeZoom +url_a[i], true);
+		xhr.send();
+	}
+	}else{
+	var ctx = canvas.getContext('2d');
+	ctx.fillStyle = '#fff';
+	ctx.globalAlpha=0;
+	ctx.fillRect(0, 0, 256, 256);
+	this.tileDrawn(canvas);
+	}
+}
+
+
+//河川中心線スタイル
+function rvrcl_style(feature){
+     switch (feature.properties['type']){
+       case '細河川（通常部）':
+        return {setLineDash:[],strokeStyle:"#77f",lineWidth:2,globalAlpha:0.5,lineCap:"butt"};
+       case '細河川（枯れ川部）':
+        return {setLineDash:[],strokeStyle:"#77f",lineWidth:2,globalAlpha:0.5,lineCap:"butt"};
+       case '河川中心線（通常部）':
+        return {setLineDash:[],strokeStyle:"#00f",lineWidth:4,globalAlpha:0.5,lineCap:"butt"};
+       case '河川中心線（枯れ川部）':
+        return {setLineDash:[],strokeStyle:"#00f",lineWidth:4,globalAlpha:0.5,lineCap:"butt"};
+       case '人工水路（空間）':
+        return {setLineDash:[],strokeStyle:"#77f",lineWidth:2,globalAlpha:0.5,lineCap:"butt"};
+       case '人工水路（地下）':
+        return {setLineDash:[],strokeStyle:"#77f",lineWidth:2,globalAlpha:0.5,lineCap:"butt"};
+       case '用水路':
+        return {setLineDash:[],strokeStyle:"#77f",lineWidth:2,globalAlpha:0.5,lineCap:"butt"};
+       case 'その他':
+        return {setLineDash:[],strokeStyle:"#77f",lineWidth:2,globalAlpha:0.5,lineCap:"butt"};
+       case '不明':
+        return {setLineDash:[],strokeStyle:"#77f",lineWidth:2,globalAlpha:0.5,lineCap:"butt"};
+     }
+}
+
+//河川中心線レイヤ
+var rvrcllayer = L.tileLayer.canvas({attribution:"河川中心線",minZoom:14,maxNativeZoom:16,maxZoom:18,async:true});
+rvrcllayer.drawTile = function(canvas, tilePoint, zoom) {
+	if(zoom>this.options.minZoom){
+	var urlid = "experimental_rvrcl";
+	var dz = zoom - this.options.maxNativeZoom;
+	var canvas_dx = 20;
+	var canvas_dy = 20;
+	if(dz>0){
+	 canvas.width=256*Math.pow(2, dz) + canvas_dx *2;
+	 canvas.height=256*Math.pow(2, dz) + canvas_dy *2;
+	}else{
+	 canvas.width=256 + canvas_dx *2;
+	 canvas.height=256 + canvas_dy *2;
+	}
+	var ctx = canvas.getContext('2d');
+	ctx.fillStyle = '#fff';
+	ctx.globalAlpha=0;
+	ctx.fillRect(0, 0, canvas.width, canvas.height);
+	this.tileDrawn(canvas);
+	var url_a = cl_geturl(tilePoint,zoom,dz);
+	var flag =0;
+	var that = this;
+	for ( var i=0; i<url_a.length; i++ ){
+		var xhr = new XMLHttpRequest();
+		xhr.onload = function() {
+			if(flag==0){
+			flag=1;
+			canvas.style.left = canvas.offsetLeft - canvas_dx + 'px';
+			canvas.style.top = canvas.offsetTop - canvas_dy + 'px';
+			}
+			var cl_json = JSON.parse(this.responseText);
+			featsearch(cl_json.features,tilePoint,zoom,dz,canvas,canvas_dx,canvas_dy,urlid);
+			that.tileDrawn(canvas);
+		};
+		xhr.open("get", 'http://cyberjapandata.gsi.go.jp/xyz/'+urlid+'/'+ this.options.maxNativeZoom +url_a[i], true);
+		xhr.send();
+	}
+	}else{
+	var ctx = canvas.getContext('2d');
+	ctx.fillStyle = '#fff';
+	ctx.globalAlpha=0;
+	ctx.fillRect(0, 0, 256, 256);
+	this.tileDrawn(canvas);
+	}
+}
+
+
+//鉄道中心線スタイル
+function railcl_style(feature){
+     if(feature.properties['snglDbl']=="駅部分"){
+        return {setLineDash:[],strokeStyle:"#ff0",lineWidth:10,globalAlpha:0.5,lineCap:"butt"};
+      }else{
+        return {setLineDash:[],strokeStyle:"#0f0",lineWidth:5,globalAlpha:0.5,lineCap:"butt"};
+      }
+}
+
+//鉄道中心線レイヤ
+var railcllayer = L.tileLayer.canvas({attribution:"鉄道中心線",minZoom:14,maxNativeZoom:16,maxZoom:18,async:true});
+railcllayer.drawTile = function(canvas, tilePoint, zoom) {
+	if(zoom>this.options.minZoom){
+	var urlid = "experimental_railcl";
+	var dz = zoom - this.options.maxNativeZoom;
+	var canvas_dx = 20;
+	var canvas_dy = 20;
+	if(dz>0){
+	 canvas.width=256*Math.pow(2, dz) + canvas_dx *2;
+	 canvas.height=256*Math.pow(2, dz) + canvas_dy *2;
+	}else{
+	 canvas.width=256 + canvas_dx *2;
+	 canvas.height=256 + canvas_dy *2;
+	}
+	var ctx = canvas.getContext('2d');
+	ctx.fillStyle = '#fff';
+	ctx.globalAlpha=0;
+	ctx.fillRect(0, 0, canvas.width, canvas.height);
+	this.tileDrawn(canvas);
+	var url_a = cl_geturl(tilePoint,zoom,dz);
+	var flag =0;
+	var that = this;
+	for ( var i=0; i<url_a.length; i++ ){
+		var xhr = new XMLHttpRequest();
+		xhr.onload = function() {
+			if(flag==0){
+			flag=1;
+			canvas.style.left = canvas.offsetLeft - canvas_dx + 'px';
+			canvas.style.top = canvas.offsetTop - canvas_dy + 'px';
+			}
+			var cl_json = JSON.parse(this.responseText);
+			featsearch(cl_json.features,tilePoint,zoom,dz,canvas,canvas_dx,canvas_dy,urlid);
+			that.tileDrawn(canvas);
+		};
+		xhr.open("get", 'http://cyberjapandata.gsi.go.jp/xyz/'+urlid+'/'+ this.options.maxNativeZoom +url_a[i], true);
+		xhr.send();
+	}
+	}else{
+	var ctx = canvas.getContext('2d');
+	ctx.fillStyle = '#fff';
+	ctx.globalAlpha=0;
+	ctx.fillRect(0, 0, 256, 256);
+	this.tileDrawn(canvas);
+	}
+}
+
+
+//注記
+var xhr = new XMLHttpRequest();
+xhr.open('GET', 'http://cyberjapandata.gsi.go.jp/xyz/experimental_anno/style.js', false);
+xhr.send(null);
+var stylejs = eval( "(" + xhr.responseText + ")" );
+
+var annolayer = new L.TileLayer.GeoJSON(
+'http://cyberjapandata.gsi.go.jp/xyz/experimental_anno/{z}/{x}/{y}.geojson',
+stylejs.options,stylejs.geojsonOptions);
+
+
+
+var std = L.tileLayer(
+'http://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png',
+{attribution: "地理院タイル（標準地図）", 
+maxNativeZoom: 18, maxZoom: 18, opacity:1});
+var ort = L.tileLayer(
+'http://cyberjapandata.gsi.go.jp/xyz/ort/{z}/{x}/{y}.jpg',
+{attribution: "地理院タイル（オルソ）", 
+maxNativeZoom: 17, maxZoom: 18, opacity:0.7});
+
+var blank = L.tileLayer(
+'http://cyberjapandata.gsi.go.jp/xyz/blank/{z}/{x}/{y}.png',
+{attribution: "地理院タイル（白地図）", 
+maxNativeZoom: 14, maxZoom: 18, opacity:1});
+
+var GSI = {
+	GLOBALS : {}
+};
+
+GSI.GLOBALS.map = L.map('mapdiv', {
+  center: [35.705698,139.957527], zoom: 16,minZoom: 2, maxZoom: 18,
+  layers: [rvrcllayer,rdcllayer,railcllayer,annolayer]});
+
+L.control.scale({imperial: false}).addTo(GSI.GLOBALS.map);
+
+//var baseLayers = {"地理院タイル（標準地図）": std,"地理院タイル（オルソ）": ort,"地理院タイル（白地図）": blank};
+var baseLayers ={};
+var overlays = {"地理院タイル（標準地図）": std,"地理院タイル（オルソ）": ort,"地理院タイル（白地図）": blank,'地図情報（河川中心線）': rvrcllayer,'地図情報（道路中心線）': rdcllayer,'地図情報（鉄道中心線）': railcllayer,'地図情報（注記）': annolayer};
+
+L.control.layers(baseLayers, overlays,{position:'topright',collapsed:false}).addTo(GSI.GLOBALS.map);
+var hash = L.hash(GSI.GLOBALS.map);
+</script>
+</body>
+</html>
