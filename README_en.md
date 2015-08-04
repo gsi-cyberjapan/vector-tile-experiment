@@ -21,7 +21,7 @@ This url scheme is slippy map tilenames (XYZ).
 Here's a sample tile in GeoJSON:
 http://cyberjapandata.gsi.go.jp/xyz/experimental_fgd/18/233094/102736.geojson
 
-Please not that charset of all our GeoJSON data is UTF-8.
+Please note that charset of all our GeoJSON data is UTF-8.
 
 Also please note that our GeoJSON vector tile data does not have the concept of layers; One raw FeatureCollection is enclosed in on GeoJSON tile.
 
