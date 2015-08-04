@@ -56,6 +56,8 @@ http://maps.gsi.go.jp/?ll=35.707179,139.959544&z=17&base=ort&ls=experimental_rai
 github
 http://gsi-cyberjapan.github.io/vector-tile-experiment
 
+github(Canvas)
+http://gsi-cyberjapan.github.io/vector-tile-experiment/canvas.html
 
 # 提供の位置づけ
 国土地理院ベクトルタイル提供実験におけるデータの提供の位置づけは次のとおりです。
