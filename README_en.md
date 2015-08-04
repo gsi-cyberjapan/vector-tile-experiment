@@ -150,9 +150,15 @@ Point data for aerial photographs.
 - [default style](http://cyberjapandata.gsi.go.jp/xyz/pp/style.js)
 
 ### properties
-TODO
+- ID: identifier
+- 撮影年月日: the date of taking the photograph. ISO8601 style.
+- 撮影縮尺: the scale of the aerial photograph.
+- 撮影高度: the height the photograph is taken.
+- カラー種別: "カラー" if colored photograph, "モノクロ" if monochrome photograph.
+- 撮影計画機関: name of the organization to plan the photogrammetric flight.
 
 ## experimental_zk25000: 1:25000 map grid
+Point data representing the center of the map grid containing the names and the corners of the map grid.
 
 - **zoom level:** 8
 - **coverage:** whole Japan area
@@ -160,15 +166,20 @@ TODO
 - [default style](http://cyberjapandata.gsi.go.jp/xyz/zk25000/style.js)
 
 ### properties
-TODO
+- 図名: the name of the map sheet in Japanese kanji characters.
+- よみがな: the name of the map sheet in Japanese kana characters.
+- 図郭座標: lower and upper corners of the map grid.
 
 # How it works
-TODO
+Our vector tiles are served in rather static way. All the resources are uploaded as static files.
+
+We use tools developed in-house to get our vector tiles from a bunch of Shapefiles.
+Some tools for smaller dataset are written in Perl and [available in GitHub](https://github.com/gsi-cyberjapan/dkgshp2geojsontiles).
+
+For other larger datasets we sometimes use hadoop-streaming to sort geometries into tiles.
 
 # How to display vector tiles
-TODO
-
-Currently we use TileLayer.GeoJSON and TileLayer.Canvas of Leaflet 0.7.3.
+Currently we use TileLayer.GeoJSON and TileLayer.Canvas of Leaflet 0.7.3. Others should follow.
 
 ## TileLayer.GeoJSON
 As in [GSI Maps]( http://maps.gsi.go.jp/?ll=35.707179,139.959544&z=17&base=ort&ls=experimental_railcl%7Cexperimental_anno&cd=f4&vs=c1j0l0u0&d=l) ([GitHub repo.](https://github.com/gsi-cyberjapan/gsimaps/))
