@@ -6,12 +6,12 @@
 - 道路中心線　本レポジトリで説明
 - 鉄道中心線　本レポジトリで説明
 - 河川中心線　本レポジトリで説明
-- 注記　https://github.com/gsi-cyberjapan/experimental_anno　　で説明
-- 基盤地図情報（基本項目）　https://github.com/gsi-cyberjapan/experimental_fgd　　で説明
-- 基盤地図情報（数値標高モデル）　https://github.com/gsi-cyberjapan/experimental_dem　　で説明
-- 基準点　https://github.com/gsi-cyberjapan/experimental_cp　　で説明
-- 単写真　https://github.com/gsi-cyberjapan/experimental_pp　　で説明
-- ２万５千分1地形図郭　https://github.com/gsi-cyberjapan/experimental_zk25000　　で説明
+- 注記　https://github.com/gsi-cyberjapan/experimental_anno
+- 基盤地図情報（基本項目）　https://github.com/gsi-cyberjapan/experimental_fgd
+- 基盤地図情報（数値標高モデル）　https://github.com/gsi-cyberjapan/experimental_dem
+- 基準点　https://github.com/gsi-cyberjapan/experimental_cp
+- 単写真　https://github.com/gsi-cyberjapan/experimental_pp
+- ２万５千分1地形図郭　https://github.com/gsi-cyberjapan/experimental_zk25000
 
 # 道路中心線、鉄道中心線、河川中心線
 ズームレベル 16の GeoJSON タイルに変換したものを提供実験いたします。
