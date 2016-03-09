@@ -18,6 +18,8 @@
 　で説明
 - ２万５千分1地形図郭　https://github.com/gsi-cyberjapan/experimental_zk25000
 　で説明
+- 地形分類　https://github.com/gsi-cyberjapan/experimental_landformclassification
+　で説明
 
 # 道路中心線、鉄道中心線、河川中心線
 ズームレベル 16の GeoJSON タイルに変換したものを提供実験いたします。
