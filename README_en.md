@@ -182,10 +182,10 @@ For other larger datasets we sometimes use hadoop-streaming to sort geometries i
 Currently we use TileLayer.GeoJSON and TileLayer.Canvas of Leaflet 0.7.3. Others should follow.
 
 ## TileLayer.GeoJSON
-As in [GSI Maps]( http://maps.gsi.go.jp/?ll=35.707179,139.959544&z=17&base=ort&ls=experimental_railcl%7Cexperimental_anno&cd=f4&vs=c1j0l0u0&d=l) ([GitHub repo.](https://github.com/gsi-cyberjapan/gsimaps/))
+As in [GSI Maps](http://maps.gsi.go.jp/#17/35.707179/139.959544/&base=ort&ls=ort%7Cexperimental_railcl%7Cexperimental_anno&disp=111&lcd=experimental_anno&vs=c1j0l0u0f0&d=l) ([GitHub repo.](https://github.com/gsi-cyberjapan/gsimaps/))
 
 ## TileLayer.Canvas
-As in an [example]( http://gsi-cyberjapan.github.io/vector-tile-experiment/canvas.html) ([GitHub repo.](https://github.com/gsi-cyberjapan/vector-tile-experiment/))
+As in an [example](http://gsi-cyberjapan.github.io/vector-tile-experiment/canvas.html) ([GitHub repo.](https://github.com/gsi-cyberjapan/vector-tile-experiment/))
 
 # ChangeLog
 - 2014-08-01 Experiment started
