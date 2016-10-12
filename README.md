@@ -8,7 +8,7 @@
 
 ##GeoJSONタイルのデータ仕様
 - 拡張子は「geojson」
- -「The GeoJSON Format Specification」が定める形式。詳細は次のURLを参照のこと。 http://geojson.org/
+ - 「The GeoJSON Format Specification」が定める形式。詳細は次のURLを参照のこと。 http://geojson.org/
 - 文字コードはUTF-8
 - 1ファイルに1つのFeatureCollection型のオブジェクトがある。
 - 個々のオブジェクトはそのFeatureCollection型のオブジェクトの中に配列で入っている。
