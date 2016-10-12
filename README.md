@@ -7,7 +7,8 @@
 `http://cyberjapandata.gsi.go.jp/xyz/{dataID}/{z}/{x}/{y}.{拡張子}`
 
 ##GeoJSONタイルのデータ仕様
-- 拡張子は「geojson」（「The GeoJSON Format Specification」が定める形式。詳細は次のURLを参照のこと。 http://geojson.org/ ）
+- 拡張子は「geojson」
+ -「The GeoJSON Format Specification」が定める形式。詳細は次のURLを参照のこと。 http://geojson.org/
 - 文字コードはUTF-8
 - 1ファイルに1つのFeatureCollection型のオブジェクトがある。
 - 個々のオブジェクトはそのFeatureCollection型のオブジェクトの中に配列で入っている。
@@ -39,30 +40,30 @@
 データの仕様は次のとおりです。
 
 - 道路中心線
--- テンプレート URL：　http://cyberjapandata.gsi.go.jp/xyz/experimental_rdcl/{z}/{x}/{y}.geojson
--- サンプル：　http://cyberjapandata.gsi.go.jp/xyz/experimental_rdcl/16/58242/25798.geojson
--- ベクトルタイルスタイル定義：　http://cyberjapandata.gsi.go.jp/xyz/experimental_rdcl/style.js
+ - テンプレート URL：　http://cyberjapandata.gsi.go.jp/xyz/experimental_rdcl/{z}/{x}/{y}.geojson
+ - サンプル：　http://cyberjapandata.gsi.go.jp/xyz/experimental_rdcl/16/58242/25798.geojson
+ - ベクトルタイルスタイル定義：　http://cyberjapandata.gsi.go.jp/xyz/experimental_rdcl/style.js
 
 - 鉄道中心線
--- テンプレート URL：　http://cyberjapandata.gsi.go.jp/xyz/experimental_railcl/{z}/{x}/{y}.geojson
--- サンプル：　http://cyberjapandata.gsi.go.jp/xyz/experimental_railcl/16/58242/25798.geojson
--- ベクトルタイルスタイル定義：　http://cyberjapandata.gsi.go.jp/xyz/experimental_railcl/style.js
+ - テンプレート URL：　http://cyberjapandata.gsi.go.jp/xyz/experimental_railcl/{z}/{x}/{y}.geojson
+ - サンプル：　http://cyberjapandata.gsi.go.jp/xyz/experimental_railcl/16/58242/25798.geojson
+ - ベクトルタイルスタイル定義：　http://cyberjapandata.gsi.go.jp/xyz/experimental_railcl/style.js
 
 - 河川中心線
--- テンプレート URL：　http://cyberjapandata.gsi.go.jp/xyz/experimental_rvrcl/{z}/{x}/{y}.geojson
--- サンプル：　http://cyberjapandata.gsi.go.jp/xyz/experimental_rvrcl/16/58242/25798.geojson
--- ベクトルタイルスタイル定義：　http://cyberjapandata.gsi.go.jp/xyz/experimental_rvrcl/style.js
+ - テンプレート URL：　http://cyberjapandata.gsi.go.jp/xyz/experimental_rvrcl/{z}/{x}/{y}.geojson
+ - サンプル：　http://cyberjapandata.gsi.go.jp/xyz/experimental_rvrcl/16/58242/25798.geojson
+ - ベクトルタイルスタイル定義：　http://cyberjapandata.gsi.go.jp/xyz/experimental_rvrcl/style.js
 
 ## データについて
 提供範囲は日本全国になります。
 データの内容の詳細は、[電子国土基本図地図情報ファイル仕様書](http://www.gsi.go.jp/common/000093949.pdf)（PDFファイル）等をご覧ください。
 
 ## デモサイト
-地理院地図
+- 地理院地図
 http://maps.gsi.go.jp/#17/35.707179/139.959544/&base=ort&ls=ort%7Cexperimental_railcl%7Cexperimental_anno&disp=111&lcd=experimental_anno&vs=c1j0l0u0f0&d=l
-github
+- github
 http://gsi-cyberjapan.github.io/vector-tile-experiment
-github(Canvas)
+- github(Canvas)
 http://gsi-cyberjapan.github.io/vector-tile-experiment/canvas.html
 
 
