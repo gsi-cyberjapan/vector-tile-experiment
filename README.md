@@ -25,10 +25,6 @@
 で説明
 - 基盤地図情報（数値標高モデル）　https://github.com/gsi-cyberjapan/experimental_dem
 で説明
-- 基準点　https://github.com/gsi-cyberjapan/experimental_cp
-で説明
-- 単写真　https://github.com/gsi-cyberjapan/experimental_pp
-で説明
 - ２万５千分1地形図郭　https://github.com/gsi-cyberjapan/experimental_zk25000
 で説明
 - 地形分類　https://github.com/gsi-cyberjapan/experimental_landformclassification
