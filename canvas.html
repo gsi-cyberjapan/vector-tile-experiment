@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <title></title>
-<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css"/>
-<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@0.7.3/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@0.7.3/dist/leaflet.js"></script>
 <script src="./TileLayer.GeoJSON.js"></script>
 <script src="./leaflet-hash.js"></script>
 <style>
@@ -144,7 +144,7 @@ rdcllayer.drawTile = function(canvas, tilePoint, zoom) {
 			featsearch(cl_json.features,tilePoint,zoom,dz,canvas,canvas_dx,canvas_dy,urlid);
 			that.tileDrawn(canvas);
 		};
-		xhr.open("get", 'http://cyberjapandata.gsi.go.jp/xyz/'+urlid+'/'+ this.options.maxNativeZoom +url_a[i], true);
+		xhr.open("get", 'https://cyberjapandata.gsi.go.jp/xyz/'+urlid+'/'+ this.options.maxNativeZoom +url_a[i], true);
 		xhr.send();
 	}
 	}else{
@@ -216,7 +216,7 @@ rvrcllayer.drawTile = function(canvas, tilePoint, zoom) {
 			featsearch(cl_json.features,tilePoint,zoom,dz,canvas,canvas_dx,canvas_dy,urlid);
 			that.tileDrawn(canvas);
 		};
-		xhr.open("get", 'http://cyberjapandata.gsi.go.jp/xyz/'+urlid+'/'+ this.options.maxNativeZoom +url_a[i], true);
+		xhr.open("get", 'https://cyberjapandata.gsi.go.jp/xyz/'+urlid+'/'+ this.options.maxNativeZoom +url_a[i], true);
 		xhr.send();
 	}
 	}else{
@@ -273,7 +273,7 @@ railcllayer.drawTile = function(canvas, tilePoint, zoom) {
 			featsearch(cl_json.features,tilePoint,zoom,dz,canvas,canvas_dx,canvas_dy,urlid);
 			that.tileDrawn(canvas);
 		};
-		xhr.open("get", 'http://cyberjapandata.gsi.go.jp/xyz/'+urlid+'/'+ this.options.maxNativeZoom +url_a[i], true);
+		xhr.open("get", 'https://cyberjapandata.gsi.go.jp/xyz/'+urlid+'/'+ this.options.maxNativeZoom +url_a[i], true);
 		xhr.send();
 	}
 	}else{
@@ -288,27 +288,27 @@ railcllayer.drawTile = function(canvas, tilePoint, zoom) {
 
 //注記
 var xhr = new XMLHttpRequest();
-xhr.open('GET', 'http://cyberjapandata.gsi.go.jp/xyz/experimental_anno/style.js', false);
+xhr.open('GET', 'https://cyberjapandata.gsi.go.jp/xyz/experimental_anno/style.js', false);
 xhr.send(null);
 var stylejs = eval( "(" + xhr.responseText + ")" );
 
 var annolayer = new L.TileLayer.GeoJSON(
-'http://cyberjapandata.gsi.go.jp/xyz/experimental_anno/{z}/{x}/{y}.geojson',
+'https://cyberjapandata.gsi.go.jp/xyz/experimental_anno/{z}/{x}/{y}.geojson',
 stylejs.options,stylejs.geojsonOptions);
 
 
 
 var std = L.tileLayer(
-'http://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png',
+'https://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png',
 {attribution: "地理院タイル（標準地図）", 
 maxNativeZoom: 18, maxZoom: 18, opacity:1});
 var ort = L.tileLayer(
-'http://cyberjapandata.gsi.go.jp/xyz/ort/{z}/{x}/{y}.jpg',
+'https://cyberjapandata.gsi.go.jp/xyz/ort/{z}/{x}/{y}.jpg',
 {attribution: "地理院タイル（オルソ）", 
 maxNativeZoom: 17, maxZoom: 18, opacity:0.7});
 
 var blank = L.tileLayer(
-'http://cyberjapandata.gsi.go.jp/xyz/blank/{z}/{x}/{y}.png',
+'https://cyberjapandata.gsi.go.jp/xyz/blank/{z}/{x}/{y}.png',
 {attribution: "地理院タイル（白地図）", 
 maxNativeZoom: 14, maxZoom: 18, opacity:1});
 
