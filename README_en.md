@@ -19,7 +19,7 @@ http://cyberjapandata.gsi.go.jp/xyz/{layer}/{z}/{x}/{y}.geojson
 This url scheme is slippy map tilenames (XYZ).
 
 Here's a sample tile in GeoJSON:
-http://cyberjapandata.gsi.go.jp/xyz/experimental_fgd/18/233094/102736.geojson
+https://cyberjapandata.gsi.go.jp/xyz/experimental_fgd/18/233094/102736.geojson
 
 Please note that the charset of all our GeoJSON data is UTF-8.
 
@@ -38,8 +38,8 @@ Road centerline.
 
 - **zoom level:** 16
 - **coverage:** whole Japan area
-- [example]( http://cyberjapandata.gsi.go.jp/xyz/experimental_rdcl/16/58242/25798.geojson)
-- [default style]( http://cyberjapandata.gsi.go.jp/xyz/experimental_rdcl/style.js)
+- [example]( https://cyberjapandata.gsi.go.jp/xyz/experimental_rdcl/16/58242/25798.geojson)
+- [default style]( https://cyberjapandata.gsi.go.jp/xyz/experimental_rdcl/style.js)
 
 Please note [the specification for the default style](https://github.com/gsi-cyberjapan/style-dot-js-spec).
 
@@ -73,8 +73,8 @@ Railroad centerline.
 
 - **zoom level:** 16
 - **coverage:** whole Japan area
-- [example](http://cyberjapandata.gsi.go.jp/xyz/experimental_railcl/16/58242/25798.geojson)
-- [default style](http://cyberjapandata.gsi.go.jp/xyz/experimental_railcl/style.js)
+- [example](https://cyberjapandata.gsi.go.jp/xyz/experimental_railcl/16/58242/25798.geojson)
+- [default style](https://cyberjapandata.gsi.go.jp/xyz/experimental_railcl/style.js)
 
 ### properties
 TODO
@@ -83,8 +83,8 @@ TODO
 
 - **zoom level:** 16
 - **coverage:** whole Japan area
-- [example](http://cyberjapandata.gsi.go.jp/xyz/experimental_rvrcl/16/58242/25798.geojson)
-- [default style](http://cyberjapandata.gsi.go.jp/xyz/experimental_rvrcl/style.js)
+- [example](https://cyberjapandata.gsi.go.jp/xyz/experimental_rvrcl/16/58242/25798.geojson)
+- [default style](https://cyberjapandata.gsi.go.jp/xyz/experimental_rvrcl/style.js)
 
 ### properties
 TODO
@@ -93,8 +93,8 @@ TODO
 
 - **zoom level:** 15
 - **coverage:** whole Japan area
-- [example](http://cyberjapandata.gsi.go.jp/xyz/experimental_anno/15/29106/12903.geojson)
-- [default style](http://cyberjapandata.gsi.go.jp/xyz/experimental_anno/style.js)
+- [example](https://cyberjapandata.gsi.go.jp/xyz/experimental_anno/15/29106/12903.geojson)
+- [default style](https://cyberjapandata.gsi.go.jp/xyz/experimental_anno/style.js)
 
 ### properties
 TODO
@@ -103,9 +103,9 @@ TODO
 
 - **zoom level:** 18
 - **coverage:** [experiment area](https://github.com/handygeospatial/vector-tile-experiment-area/blob/gh-pages/area.geojson)
-- [example](http://cyberjapandata.gsi.go.jp/xyz/experimental_fgd/18/233094/102736.geojson)
+- [example](https://cyberjapandata.gsi.go.jp/xyz/experimental_fgd/18/233094/102736.geojson)
 
-The default style of this layer is not yet separated from the [example site](http://gsi-cyberjapan.github.io/experimental_fgd/).
+The default style of this layer is not yet separated from the [example site](https://gsi-cyberjapan.github.io/experimental_fgd/).
 
 ### properties
 TODO
@@ -114,9 +114,9 @@ TODO
 
 - **zoom level:** 18
 - **coverage:** [experiment area](https://github.com/handygeospatial/vector-tile-experiment-area/blob/gh-pages/area.geojson)
-- [example](http://cyberjapandata.gsi.go.jp/xyz/experimental_dem5a/18/233094/102736.geojson)
+- [example](https://cyberjapandata.gsi.go.jp/xyz/experimental_dem5a/18/233094/102736.geojson)
 
-Please see the [demo site](http://gsi-cyberjapan.github.io/experimental_dem/).
+Please see the [demo site](https://gsi-cyberjapan.github.io/experimental_dem/).
 
 ### properties
 
@@ -124,9 +124,9 @@ Please see the [demo site](http://gsi-cyberjapan.github.io/experimental_dem/).
 
 - **zoom level:** 18
 - **coverage:** [experiment area](https://github.com/handygeospatial/vector-tile-experiment-area/blob/gh-pages/area.geojson)
-- [example](http://cyberjapandata.gsi.go.jp/xyz/experimental_dem10b/18/233094/102736.geojson)
+- [example](https://cyberjapandata.gsi.go.jp/xyz/experimental_dem10b/18/233094/102736.geojson)
 
-Please see the [demo site](http://gsi-cyberjapan.github.io/experimental_dem/).
+Please see the [demo site](https://gsi-cyberjapan.github.io/experimental_dem/).
 
 ### properties
 TODO
@@ -135,8 +135,8 @@ TODO
 
 - **zoom level:** 7-12
 - **coverage:** whole Japan area
-- [example](http://cyberjapandata.gsi.go.jp/xyz/cp/12/3638/1612.geojson)
-- [default style](http://cyberjapandata.gsi.go.jp/xyz/cp/style.js)
+- [example](https://cyberjapandata.gsi.go.jp/xyz/cp/12/3638/1612.geojson)
+- [default style](https://cyberjapandata.gsi.go.jp/xyz/cp/style.js)
 
 ### properties
 TODO
@@ -146,8 +146,8 @@ Point data for aerial photographs.
 
 - **zoom level:** 14
 - **coverage:** whole Japan area
-- [example](http://cyberjapandata.gsi.go.jp/xyz/pp/14/14552/6452.geojson)
-- [default style](http://cyberjapandata.gsi.go.jp/xyz/pp/style.js)
+- [example](https://cyberjapandata.gsi.go.jp/xyz/pp/14/14552/6452.geojson)
+- [default style](https://cyberjapandata.gsi.go.jp/xyz/pp/style.js)
 
 ### properties
 - ID: identifier
@@ -162,8 +162,8 @@ Point data representing the center of the map grid containing the names and the 
 
 - **zoom level:** 8
 - **coverage:** whole Japan area
-- [example](http://cyberjapandata.gsi.go.jp/xyz/zk25000/8/224/101.geojson)
-- [default style](http://cyberjapandata.gsi.go.jp/xyz/zk25000/style.js)
+- [example](https://cyberjapandata.gsi.go.jp/xyz/zk25000/8/224/101.geojson)
+- [default style](https://cyberjapandata.gsi.go.jp/xyz/zk25000/style.js)
 
 ### properties
 - 図名: the name of the map sheet in Japanese kanji characters.
@@ -182,10 +182,10 @@ For other larger datasets we sometimes use hadoop-streaming to sort geometries i
 Currently we use TileLayer.GeoJSON and TileLayer.Canvas of Leaflet 0.7.3. Others should follow.
 
 ## TileLayer.GeoJSON
-As in [GSI Maps](http://maps.gsi.go.jp/#17/35.707179/139.959544/&base=ort&ls=ort%7Cexperimental_railcl%7Cexperimental_anno&disp=111&lcd=experimental_anno&vs=c1j0l0u0f0&d=l) ([GitHub repo.](https://github.com/gsi-cyberjapan/gsimaps/))
+As in [GSI Maps](https://maps.gsi.go.jp/#17/35.707179/139.959544/&base=ort&ls=ort%7Cexperimental_railcl%7Cexperimental_anno&disp=111&lcd=experimental_anno&vs=c1j0l0u0f0&d=l) ([GitHub repo.](https://github.com/gsi-cyberjapan/gsimaps/))
 
 ## TileLayer.Canvas
-As in an [example](http://gsi-cyberjapan.github.io/vector-tile-experiment/canvas.html) ([GitHub repo.](https://github.com/gsi-cyberjapan/vector-tile-experiment/))
+As in an [example](https://gsi-cyberjapan.github.io/vector-tile-experiment/canvas.html) ([GitHub repo.](https://github.com/gsi-cyberjapan/vector-tile-experiment/))
 
 # ChangeLog
 - 2014-08-01 Experiment started
