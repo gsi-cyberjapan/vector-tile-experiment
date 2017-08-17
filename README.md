@@ -4,7 +4,7 @@
 
 ## ベクトルタイルの仕様
 本提供実験によるベクトルタイルは、地理院タイルと同じ方式で配信します。
-`http://cyberjapandata.gsi.go.jp/xyz/{dataID}/{z}/{x}/{y}.{拡張子}`
+`https://cyberjapandata.gsi.go.jp/xyz/{dataID}/{z}/{x}/{y}.{拡張子}`
 
 ##GeoJSONタイルのデータ仕様
 - 拡張子は「geojson」
@@ -32,11 +32,11 @@
 
 ## デモサイト
 - 地理院地図
-http://maps.gsi.go.jp/#17/35.707179/139.959544/&base=ort&ls=ort%7Cexperimental_railcl%7Cexperimental_anno&disp=111&lcd=experimental_anno&vs=c1j0l0u0f0&d=l
+https://maps.gsi.go.jp/#17/35.707179/139.959544/&base=ort&ls=ort%7Cexperimental_railcl%7Cexperimental_anno&disp=111&lcd=experimental_anno&vs=c1j0l0u0f0&d=l
 - github
-http://gsi-cyberjapan.github.io/vector-tile-experiment
+https://gsi-cyberjapan.github.io/vector-tile-experiment/
 - github(Canvas)
-http://gsi-cyberjapan.github.io/vector-tile-experiment/canvas.html
+https://gsi-cyberjapan.github.io/vector-tile-experiment/canvas.html
 
 
 ## 提供の位置づけ
