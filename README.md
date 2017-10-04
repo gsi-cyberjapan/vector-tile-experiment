@@ -13,6 +13,7 @@
 - 1ファイルに1つのFeatureCollection型のオブジェクトがある。
 - 個々のオブジェクトはそのFeatureCollection型のオブジェクトの中に配列で入っている。
 - 個々のオブジェクトには、”geometry”（座標値（経緯度座標））と”property”（属性）が設定されている。
+- GeoJSONタイルは、GeoJSONをタイル形式に分割したもの。タイル仕様については次のURLを参照のこと。http://maps.gsi.go.jp/development/siyou.html
 
 
 ## 提供データ
