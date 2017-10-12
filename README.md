@@ -24,10 +24,6 @@
 - 基盤地図情報（数値標高モデル）　https://github.com/gsi-cyberjapan/experimental_dem で説明
 - 地形分類　https://github.com/gsi-cyberjapan/experimental_landformclassification で説明
 
-## データの内容について
-提供範囲は日本全国になります。  
-データの内容の詳細は、[電子国土基本図地図情報ファイル仕様書](http://www.gsi.go.jp/common/000189294.pdf)（PDFファイル）等をご覧ください。
-
 ## デモサイト
 - 地理院地図  
 https://maps.gsi.go.jp/#17/35.707179/139.959544/&base=ort&ls=ort%7Cexperimental_railcl%7Cexperimental_anno&disp=111&lcd=experimental_anno&vs=c1j0l0u0f0&d=l
