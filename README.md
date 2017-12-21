@@ -4,18 +4,19 @@
 
 ## ベクトルタイルの仕様
 本提供実験によるベクトルタイルは、[地理院タイル](http://maps.gsi.go.jp/development/siyou.html)と同じ方式で配信します。
-`https://cyberjapandata.gsi.go.jp/xyz/{dataID}/{z}/{x}/{y}.{拡張子}`
+`https://cyberjapandata.gsi.go.jp/xyz/{t}/{z}/{x}/{y}.{ext}`
 
-- ベクトルタイルは、GeoJSONをタイル形式に分割したもの。
-- GeoJSONは「The GeoJSON Format Specification」が定める形式で、拡張子は「geojson」。詳細は次のURLを参照のこと。 http://geojson.org/
-- 文字コードはUTF-8。
-- 1ファイルに1つのFeatureCollection型のオブジェクトがある。
-- 個々のオブジェクトはそのFeatureCollection型のオブジェクトの中に配列で入っている。
-- 個々のオブジェクトには、”geometry”（座標値（経緯度座標））と”property”（属性）が設定されている。
-- スタイルの情報は含まない。（本提供実験では、[ベクトルタイルスタイル定義 style.js 規約](https://github.com/gsi-cyberjapan/style-dot-js-spec)に則って作成されたものを使用します。）
+* 本提供実験によるベクトルタイルは、タイルに分割したGeoJSON形式のファイル群。
+* GeoJSON 形式は [RFC 7946](https://tools.ietf.org/html/rfc7946) に規定されており、拡張子を「geojson」としている。
+  * 文字コードはUTF-8。
+  * 1ファイルに1つのFeatureCollection型のオブジェクトがある。
+  * 個々のオブジェクトはそのFeatureCollection型のオブジェクトの中に配列で入っている。
+  * 個々のオブジェクトには、”geometry”（座標値（経緯度座標））と”property”（属性）が設定されている。
+  * スタイルの情報は含まない。    
+* 本提供実験では、スタイルの情報を表現するために[ベクトルタイルスタイル定義 style.js 規約](https://github.com/gsi-cyberjapan/style-dot-js-spec)を使用。
 
 ## タイル一覧
-<span style="color: #ff0000">提供実験中のデータであるため、事業化までにデータIDやデータ構成、データの内容（属性の有無等）が変わる可能性があります。</span>
+<span style="color: #ff0000">提供実験中のデータであるため、事業化までに URL やデータ構成、データの内容（属性の有無等）が変わる可能性があります。</span>
 これらを変更する場合、事前に<a href="https://twitter.com/gsi_cyberjapan/">Twitter（@gsi_cyberjapan）</a>にてアナウンスいたします。
 
 ### 地図情報（道路中心線）
